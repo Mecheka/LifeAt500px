@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Life @ 500 px</string>
+    <string name="open_drawer">Opne Menu</string>
+    <string name="close_drawer">Close Menu</string>
+</resources>
