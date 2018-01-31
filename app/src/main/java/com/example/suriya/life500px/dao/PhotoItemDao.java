@@ -1,5 +1,7 @@
 package com.example.suriya.life500px.dao;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
  */
 
 public class PhotoItemDao {
-    @SerializedName("id")               private int id;
+    @SerializedName("id")     private int id;
     @SerializedName("link")             private String link;
     @SerializedName("image_url")        private String imageUrl;
     @SerializedName("caption")          private String caption;

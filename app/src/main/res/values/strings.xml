@@ -2,4 +2,5 @@
     <string name="app_name">Life @ 500 px</string>
     <string name="open_drawer">Opne Menu</string>
     <string name="close_drawer">Close Menu</string>
+    <string name="new_photo">new photo</string>
 </resources>
