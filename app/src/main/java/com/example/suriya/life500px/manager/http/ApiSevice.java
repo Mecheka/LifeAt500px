@@ -22,4 +22,7 @@ public interface ApiSevice {
     @POST("list/after/{id}")
     Call<PhotoItemCollectDao> loadPhotoListAfterId(@Path("id") int id);
 
+    @POST("list/before/{id}")
+    Call<PhotoItemCollectDao> loadPhotoListBeforeId(@Path("id") int id);
+
 }
