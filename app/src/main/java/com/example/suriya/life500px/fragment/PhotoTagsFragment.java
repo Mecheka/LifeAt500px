@@ -1,4 +1,4 @@
-package com.inthecheesefactory.thecheeselibrary.fragment;
+package com.example.suriya.life500px.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,20 +7,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inthecheesefactory.thecheeselibrary.R;
+import com.example.suriya.life500px.R;
+import com.example.suriya.life500px.dao.PhotoItemDao;
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-public class FragmentTemplateFull extends Fragment {
+public class PhotoTagsFragment extends Fragment {
 
-    public FragmentTemplateFull() {
+    PhotoItemDao dao;
+
+    public PhotoTagsFragment() {
         super();
     }
 
-    public static FragmentTemplateFull newInstance() {
-        FragmentTemplateFull fragment = new FragmentTemplateFull();
+    public static PhotoTagsFragment newInstance(PhotoItemDao dao) {
+        PhotoTagsFragment fragment = new PhotoTagsFragment();
         Bundle args = new Bundle();
+        args.putParcelable("dao", dao);
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,6 +32,7 @@ public class FragmentTemplateFull extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dao = getArguments().getParcelable("dao");
         init(savedInstanceState);
 
         if (savedInstanceState != null)
@@ -37,7 +42,7 @@ public class FragmentTemplateFull extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_photo_tags, container, false);
         initInstances(rootView, savedInstanceState);
         return rootView;
     }

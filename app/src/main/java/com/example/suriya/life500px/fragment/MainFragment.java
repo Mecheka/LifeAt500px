@@ -1,5 +1,8 @@
 package com.example.suriya.life500px.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,13 +14,16 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.suriya.life500px.R;
+import com.example.suriya.life500px.activity.MoreInfoActivity;
 import com.example.suriya.life500px.adpater.PhotoListAdpater;
 import com.example.suriya.life500px.dao.PhotoItemCollectDao;
+import com.example.suriya.life500px.dao.PhotoItemDao;
 import com.example.suriya.life500px.manager.PhotoListManager;
 import com.example.suriya.life500px.manager.http.HttpManage;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
@@ -58,11 +64,17 @@ public class MainFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init Fragment Level
-        photoListManager = new PhotoListManager();
+        init();
 
         if (savedInstanceState != null){
             onRestoreInstanceState(savedInstanceState);
         }
+    }
+
+    private void init() {
+
+        photoListManager = new PhotoListManager();
+
     }
 
     @Override
@@ -82,6 +94,7 @@ public class MainFragment extends Fragment {
         listAdpater = new PhotoListAdpater();
         listAdpater.setDao(photoListManager.getDao());
         listView.setAdapter(listAdpater);
+        listView.setOnItemClickListener(listViewItemClickListener);
 
         swipeRefresh = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(pulltorefreshListener);
@@ -221,6 +234,17 @@ public class MainFragment extends Fragment {
                     loadMoreData();
                 }
             }
+        }
+    };
+
+    AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int posotion, long l) {
+            PhotoItemDao dao = photoListManager.getDao().getData().get(posotion);
+            Toast.makeText(getActivity(), "Position " + posotion, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), MoreInfoActivity.class);
+            intent.putExtra("dao", dao);
+            startActivity(intent);
         }
     };
 
